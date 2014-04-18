@@ -1,5 +1,16 @@
 Posts = new Meteor.Collection('posts');
 
+Posts.allow({
+  update: ownsDocument,
+  remove: ownsDocument
+});
+
+Posts.deny({
+  update: function(userId, post, fieldNames) {
+    return (_.without(fieldNames, 'url', 'title').lenght > 0);
+  }
+});
+
 Meteor.methods({
   post: function(postAttributes) {
     var user = Meteor.user(),

@@ -4,7 +4,7 @@ Meteor.publish('posts', function(options) {
 
 Meteor.publish('singlePost', function(id) {
   return id && Posts.find(id);
-})
+});
 
 Meteor.publish('comments', function(postId) {
   return Comments.find({postId: postId});
